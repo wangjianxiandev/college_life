@@ -4,6 +4,7 @@
     "pages/notebook/notebook",
     "pages/schedule/schedule",
     "pages/new/new",
+    "pages/express/express",
     "pages/logs/logs"
 
   ],

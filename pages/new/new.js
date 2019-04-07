@@ -1,3 +1,4 @@
+/* wjxdev实现新建保存删除*/
 var util = require('../../utils/util.js');
 Page({
   data: {
@@ -6,6 +7,7 @@ Page({
     revise: '',//是不是修改
     id: ''
   },
+
   btnDownSave() {
     //保存按钮
 
@@ -85,8 +87,9 @@ Page({
       for (var i = 0; i < oldText.length; i++) {
         var dic = oldText[i];
         if (dic.id == this.data.id) {
-          // wx.removeStorage(oldText[i])
+          // 删除数组中的选定的那条数据
           oldText.splice(i, 1);
+          //重新保存缓存
           wx.setStorageSync('oldText', oldText);
           wx.navigateBack({
             url: '../notebook/notebook',

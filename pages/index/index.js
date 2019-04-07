@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+/*业务逻辑--wjxdev*/
 const app = getApp()
 
 Page({

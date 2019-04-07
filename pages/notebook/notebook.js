@@ -1,4 +1,4 @@
-//index.js
+/*wjxdev实现接收new页面的缓存，并刷新页面*/
 //获取应用实例
 const app = getApp()
 var util = require('../../utils/util.js');
@@ -25,7 +25,7 @@ Page({
     
   },
 
-  //点击进入添加note的详细界面
+  //点击进入添加notebook的详细界面
   newBtnDown() {
     //跳转页面到 new
     wx.navigateTo({
