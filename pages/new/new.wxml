@@ -1,0 +1,12 @@
+<!--按钮-->
+<text class="the-text">{{time}}</text>
+
+<image class="the-btn-save" bindtap="btnDownSave" src='../../images/tabbar/ok.png'></image>
+
+<image class="the-btn-delete" bindtap='btnDownDelete' src='../../images/tabbar/cancel.png'></image>
+ 
+<!--输入框-->
+<view class="the-view">
+  <textarea class= "the-textarea"  bindinput="bindTextAreaBlur" style="  margin: 5%;width: 90%;height: 90%" auto-focus value="{{des}}"maxlength="-1" cursor-spacing="0">
+  </textarea>
+</view>

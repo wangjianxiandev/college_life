@@ -1,0 +1,21 @@
+
+<!--底部滚动-->
+<scroll-view class="des-scr" scroll-y="true" bindscroll="scroll">
+  <!--循环view-->
+  <block wx:for="{{desArr}}">
+    <navigator url="../new/new?des={{item.des}}&time={{item.time}}&image={{image}}&id={{item.id}}&revise=1">
+      <view class="des-view"  bindtap="toiletDetails" id="{{index}}">
+        <text class="des-text">{{item.des}}</text>
+        <text class="des-tiemText">{{today}}</text>
+      </view>
+    </navigator>
+  </block>
+</scroll-view>
+ 
+<!--添加按钮-->
+
+    <image class="add" mode="aspectFill" src="../../images/icons/add.png" bindtap="newBtnDown"></image>
+
+
+
+

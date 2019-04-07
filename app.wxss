@@ -1,0 +1,14 @@
+/**app.wxss**/
+.container{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  text-align: center;
+  justify-content: space-between;
+  font-size: 34rpx;
+  padding: 15rpx;
+}
+.container1 {
+  padding: 30rpx;
+  border-top: 1rpx solid #e5e5e5;
+}
