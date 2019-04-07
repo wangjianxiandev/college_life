@@ -1,5 +1,4 @@
 <!--index.wxml-->
-<!-- wjxdev -->
 <view class="container">
 
    <swiper indicator-dots="{{indicatorDots}}"  
@@ -7,7 +6,7 @@
          <block wx:for="{{imgUrls}}">  
            <swiper-item>  
               <navigator url="{{item.link}}" hover-class="navigator-hover">  
-               <image src="{{item.url}}" class="slide-image" width="355" height="150"/>  
+               <image src="{{item.url}}" class="slide-image" style='width:100%;'/>  
               </navigator>  
            </swiper-item>  
          </block>  

@@ -7,7 +7,8 @@
 }
 
 swiper{
-  height: 300rpx;
+  height: 195px;
+  width: 100%;
 }
 
 
@@ -61,7 +62,7 @@ scroll-view {
   position: relative;
   float: left;
   padding: 20px 10px;
-  width: 33.33333333%;
+  width: 50%;
   box-sizing: border-box;
 }
 .weui-grid:before {
@@ -96,8 +97,8 @@ scroll-view {
   background-color: #ECECEC;
 }
 .weui-grid__icon {
-  width: 32px;
-  height: 32px;
+  width: 100px;
+  height: 100px;
   margin: 0 auto;
 }
 .weui-grid__icon image {

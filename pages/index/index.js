@@ -1,6 +1,5 @@
 //index.js
 //获取应用实例
-/*业务逻辑--wjxdev*/
 const app = getApp()
 
 Page({
@@ -8,13 +7,13 @@ Page({
     imgUrls: [
       {
         link: '/pages/index/index',
-        url: '/images/swiper/1.png',
+        url: '/images/swiper/1.jpg',
       }, {
         link: '/pages/logs/logs',
-        url: '/images/swiper/2.png',
+        url: '/images/swiper/2.jpg',
       }, {
         link: '/pages/index/index',
-        url: '/images/swiper/3.png',
+        url: '/images/swiper/3.jpg',
       }
     ],
     indicatorDots: true,  //小点
@@ -25,49 +24,24 @@ Page({
       {
         name: '美食',
         url: '',
-        icon: '/images/nine/hanbao.png'
-      },
-      
-      {
-        name: '店铺',
-        url: '',
-        icon:'/images/nine/dianpu.png'
+        icon: '/images/nine/food2.png'
       },
       {
-        name: '咖啡厅',
+        name: '天气',
         url: '',
-        icon: '/images/nine/kafei.png'
+        icon:'/images/nine/weather2.png'
       },
       {
-        name: '礼品店',
+        name: '资源',
         url: '',
-        icon: '/images/nine/shengriliwu.png'
-      },
+        icon: '/images/nine/reading2.png'
+      },    
       {
-        name: '饮料',
+        name: '出行',
         url: '',
-        icon: '/images/nine/shipinyinliao.png'
-      },
-      {
-        name: '购物',
-        url: '',
-        icon: '/images/nine/tianmaopaidui.png'
-      },
-      {
-        name: '阅读',
-        url: '',
-        icon: '/images/nine/tushu.png'
-      },
-      {
-        name: '医疗',
-        url: '',
-        icon: '/images/nine/yaopin.png'
-      },
-      {
-        name: '足迹',
-        url: '',
-        icon: '/images/nine/zuji.png'
+        icon: '/images/nine/travel2.png'
       }
+    
     ]
   },
   onLoad: function () {
