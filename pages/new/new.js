@@ -124,8 +124,8 @@ Page({
   onShareAppMessage: function () {
     // 用户点击右上角分享
     return {
-      title: '文笔记+', // 分享标题
-      desc: '爱的再多也记录不够', // 分享描述
+      title: '爱生活', // 分享标题
+      desc: '新的一天要看开心哦~', // 分享描述
       path: 'path' // 分享路径
     }
   }
