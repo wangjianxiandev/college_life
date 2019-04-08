@@ -13,8 +13,10 @@ Page({
     //-监听页面加载
     //获取缓存内容
     //获取当天日期
+    var time = util.formatTime(new Date());
     this.setData({
-      desArr: wx.getStorageSync('oldText')
+      desArr: wx.getStorageSync('oldText'),
+      today: time
     })
     if (this.data.desArr == null && this.data.desArr == '') {
       //如果没有缓存则为空
@@ -40,16 +42,20 @@ Page({
     //获取当前缓存
     var arrayA = wx.getStorageSync('oldText');
     var isChange = wx.getStorageSync('isChange');
-    var time = util.formatTime(new Date());
-    this.setData({
-      today: time
-    })
     if (arrayA.length != this.data.desArr.length) {
       //如果数量改变从新赋值
+      var time = util.formatTime(new Date());
+      this.setData({
+        today: time
+      })
       this.setData({
         desArr: arrayA,
       })
     } else if (isChange == 1) {
+      var time = util.formatTime(new Date());
+      this.setData({
+        today: time
+      })
       wx.setStorageSync('isChange', 0);
       this.setData({
         desArr: arrayA,
