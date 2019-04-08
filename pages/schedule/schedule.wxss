@@ -86,3 +86,7 @@
   margin: 200rpx 50rpx 50rpx;
   text-align: center;
 }
+.name{
+  word-break:break-all;
+  height: 100%;
+}
