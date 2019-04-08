@@ -1,4 +1,5 @@
 //app.js
+let wechat = require('./utils/wechat.js');
 App({
   onLaunch: function () {
     // 展示本地存储能力

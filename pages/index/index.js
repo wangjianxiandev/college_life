@@ -22,7 +22,7 @@ Page({
     duration: 3000,  //滑动时间
     routers: [
       {
-        name: '美食',
+        name: '周边',
         url: '',
         icon: '/images/nine/food2.png'
       },
@@ -38,7 +38,7 @@ Page({
       },    
       {
         name: '出行',
-        url: '',
+        url: '/pages/map/map',
         icon: '/images/nine/travel2.png'
       }
     
