@@ -6,7 +6,7 @@
     <navigator url="../new/new?des={{item.des}}&time={{item.time}}&image={{image}}&id={{item.id}}&revise=1">
       <view class="des-view"  bindtap="toiletDetails" id="{{index}}">
         <text class="des-text">{{item.des}}</text>
-        <text class="des-tiemText">{{today}}</text>
+        <text class="des-tiemText">{{item.time}}</text>
       </view>
     </navigator>
   </block>

@@ -4,7 +4,6 @@ const app = getApp()
 var util = require('../../utils/util.js');
 Page({
   data: {
-    today: '',//当天日期
     desArr: []//数据源数组
   },
   // 取得时间日期信息
@@ -12,11 +11,8 @@ Page({
   onLoad: function (options) {
     //-监听页面加载
     //获取缓存内容
-    //获取当天日期
-    var time = util.formatTime(new Date());
     this.setData({
-      desArr: wx.getStorageSync('oldText'),
-      today: time
+      desArr: wx.getStorageSync('oldText')
     })
     if (this.data.desArr == null && this.data.desArr == '') {
       //如果没有缓存则为空
@@ -44,18 +40,10 @@ Page({
     var isChange = wx.getStorageSync('isChange');
     if (arrayA.length != this.data.desArr.length) {
       //如果数量改变从新赋值
-      var time = util.formatTime(new Date());
-      this.setData({
-        today: time
-      })
       this.setData({
         desArr: arrayA,
       })
     } else if (isChange == 1) {
-      var time = util.formatTime(new Date());
-      this.setData({
-        today: time
-      })
       wx.setStorageSync('isChange', 0);
       this.setData({
         desArr: arrayA,

@@ -10,7 +10,8 @@ Page({
 
   btnDownSave() {
     //保存按钮
-
+    let pages = getCurrentPages(); 
+    let prevPage = pages[pages.length - 2]; 
     //获取本地缓存
     var oldText = wx.getStorageSync('oldText');
     if (oldText != null && oldText != '') {
@@ -20,14 +21,14 @@ Page({
         for (var i = 0; i < oldText.length; i++) {
           var dic = oldText[i];
           if (dic.id == this.data.id) {
-            oldText[i] = { 'des': this.data.textAreaDes,  'time': dic.time, 'id': dic.id };
+            oldText[i] = { 'des': this.data.textAreaDes,  'time': this.data.time, 'id': dic.id };
             console.log(oldText[i])
             //存入缓存
             wx.setStorageSync('oldText', oldText);
             wx.setStorageSync('isChange', 1);
             wx.navigateBack({
               url: '../notebook/notebook',
-            
+    
             });
           }
         }
@@ -67,7 +68,7 @@ Page({
       })
       wx.navigateBack({
         url: '../notebook/notebook',
-      })
+      });
     }
     //存入缓存
     wx.setStorageSync('oldText', oldText);
