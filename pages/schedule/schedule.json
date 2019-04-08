@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#F08080",
+  "navigationBarTitleText": "番茄法",
+  "navigationBarTextStyle": "black"
 }
