@@ -7,6 +7,8 @@
     "pages/map/map",
     "pages/routes/routes",
     "pages/inputtip/inputtip",
+    "pages/poi/poi",
+    "pages/tips/tips",
     "pages/logs/logs"
 
   ],

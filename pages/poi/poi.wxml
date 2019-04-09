@@ -1,0 +1,13 @@
+<view class="map_container">
+ <map class="map" longitude="{{longitude}}" latitude="{{latitude}}" include-points="{{points}}" markers='{{markers}}'>
+   <cover-view class="map-tab-bar">
+   
+    <cover-view class="map-tab-li {{item.id == status ? 'active' : ''}}" bindtap="getType" data-type="{{item.id}}" wx:key="aroundListId" wx:for="{{aroundList}}">{{item.name}}</cover-view>
+   </cover-view>
+
+   <cover-view class="map-tab-bar map-foot {{isShow ? '' : 'map-hide'}}">
+    <cover-view class="map-name">{{name}}</cover-view>
+    <cover-view class="map-address">{{address}}</cover-view>
+   </cover-view>
+ </map>
+</view>

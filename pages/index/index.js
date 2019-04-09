@@ -23,7 +23,7 @@ Page({
     routers: [
       {
         name: '周边',
-        url: '',
+        url: '/pages/poi/poi',
         icon: '/images/nine/food2.png'
       },
       {
