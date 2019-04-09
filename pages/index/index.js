@@ -28,7 +28,7 @@ Page({
       },
       {
         name: '天气',
-        url: '',
+        url: '/pages/weather/weather',
         icon:'/images/nine/weather2.png'
       },
       {
