@@ -62,15 +62,14 @@ Page({
     var myAmap = new amap.AMapWX({ key: '07f55ffb53ed08c3fff087ec0691cd34' });
     myAmap.getPoiAround({
       iconPath: '../../images/map/marker.png',
-      iconPathSelected: '../../images/map/marker_checked.png',
-      // querykeywords: keywords,
+      querykeywords: keywords,
       querytypes: types,
       location: _this.data.location,
       success(data) {
         if (data.markers) {
           var markers = [], points = [];
           for (var value of data.markers) {
-            if (value.id > 15) break;
+            if (value.id > 15) break;//至少返回15条附近相关内容
             if (value.id == 0) {
               _this.setData({
                 name: value.name,
