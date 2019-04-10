@@ -1,0 +1,41 @@
+
+<view class='top'>
+  <text class="{{index==0?'active':''}}" catchtap='mshowing'>正在上映</text>
+  <text class="{{index==1?'active':''}}" catchtap='mrecommend'>值得一看</text>
+  <text class="{{index==2?'active':''}}" catchtap='msearch'>影片搜索</text>
+</view>
+<view  wx:if="{{index==0}}">
+  <import src="../../../component/filmList/filmList.wxml"/>
+  <template is="filmList" data="{{films: films, hasMore: hasMore, showLoading: showLoading}}"/>
+  <import src="../../../component/message/message.wxml"/>
+  <template is="message" data="{{message: message}}"/>
+</view>
+  
+<view wx:elif="{{index==1}}">
+  <!-- <include src="../recommend/recommend.wxml"/> -->
+  <import src="../../../component/filmList/filmList.wxml"/>
+  <template is="filmList" data="{{films: films, hasMore: hasMore, showLoading: showLoading}}"/>
+  <import src="../../../component/message/message.wxml"/>
+  <template is="message" data="{{message: message}}"/>
+</view>
+
+<view class='reg'wx:else>
+  <!-- <include src="../search/search.wxml"/> -->
+   <view class="search-hd">
+      <view class="search-area">
+          <form bindsubmit="search">
+              <view class="search-type" bindtap="changeSearchType">{{searchType == 'keyword' ? '默认' : '类型'}}</view>
+              <input class="search-txt" name="keyword" placeholder="{{searchType == 'keyword' ? '请输入电影标题、演员或导演' : '请输入影片类型，如：爱情、喜剧'}}"/>
+              <button class="search-btn" formType="submit">搜索</button>
+          </form>
+      </view>
+      <view class="search-keyword">
+          <view class="search-keyword-title">热门搜索</view>
+          <view wx:for="{{hotKeyword}}" wx:for-item="hotKeywordItem" wx:key="hotKeywordItem" class="search-keyword-item" data-keyword="{{hotKeywordItem}}" bindtap="searchByKeyword">{{hotKeywordItem}}</view>
+          <view class="search-keyword-title">热门标签</view>
+          <view wx:for="{{hotTag}}" wx:for-item="hotTagItem" wx:key="hotTagItem" class="search-keyword-item" data-keyword="{{hotTagItem}}" bindtap="searchByTag">{{hotTagItem}}</view>        
+      </view>
+  </view>
+  <import src="../../../component/message/message.wxml"/>
+  <template is="message" data="{{message: message}}"/>
+</view>

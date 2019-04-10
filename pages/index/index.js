@@ -32,8 +32,8 @@ Page({
         icon:'/images/nine/weather2.png'
       },
       {
-        name: '资源',
-        url: '',
+        name: '电影',
+        url: '/pages/movieall/home/home',
         icon: '/images/nine/reading2.png'
       },    
       {
