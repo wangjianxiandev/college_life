@@ -32,9 +32,9 @@ Page({
         icon:'/images/nine/weather2.png'
       },
       {
-        name: '',
+        name: '电影',
         url: '/pages/movieall/home/home',
-        icon: '/images/nine/reading2.png'
+        icon: '/images/nine/movie2.png'
       },    
       {
         name: '出行',
