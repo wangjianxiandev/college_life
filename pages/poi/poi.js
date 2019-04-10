@@ -1,106 +1,143 @@
-var app = getApp();
-var amap = require('../../utils/amap-wx.js');
+var amapFile = require('../../utils/amap-wx.js');
+var config = require('../../utils/config.js');
 
+var markersData = [];
 Page({
   data: {
-    aroundList: [
-      {
-        name: '餐饮',
-        id: '050000'
-      },
-      {
-        name: '购物',
-        id: '060000'
-      },
-      {
-        name: '医疗',
-        id: '090000'
-      },
-      {
-        name: '住宿',
-        id: '100000'
-      },
-    ],
-    status: null,
-    latitude: null,
-    longitude: null,
-    isShow: false,
     markers: [],
-    points: [],
-    location: '',
-    name: '',
-    address: ''
+    latitude: '',
+    longitude: '',
+    textData: {},
+    city: ''
   },
-  onLoad: function () {
-    // 页面加载获取当前定位位置为地图的中心坐标
-    var _this = this;
-    wx.getLocation({
-      success(data) {
-        if (data) {
-          _this.setData({
-            latitude: data.latitude,
-            longitude: data.longitude,
-            markers: [{
-              id: 0,
-              latitude: data.latitude,
-              longitude: data.longitude,
-              iconPath: '../../images/map/marker.png',
-              width: 30,
-              height: 40
-            }]
+  makertap: function (e) {
+    var id = e.markerId;
+    var that = this;
+    that.showMarkerInfo(markersData, id);
+    that.changeMarkerColor(markersData, id);
+  },
+  onLoad: function (e) {
+    var that = this;
+    var key = config.Config.key;
+    var myAmapFun = new amapFile.AMapWX({ key: key });
+    var params = {
+      iconPathSelected: '../../images/map/marker_checked.png',
+      iconPath: '../../images/map/marker.png',
+      success: function (data) {
+        markersData = data.markers;
+        var poisData = data.poisData;
+        var markers_new = [];
+        markersData.forEach(function (item, index) {
+          markers_new.push({
+            id: item.id,
+            latitude: item.latitude,
+            longitude: item.longitude,
+            iconPath: item.iconPath,
+            width: item.width,
+            height: item.height
+          })
+
+        })
+        if (markersData.length > 0) {
+          that.setData({
+            markers: markers_new
+          });
+          that.setData({
+            city: poisData[0].cityname || ''
+          });
+          that.setData({
+            latitude: markersData[0].latitude
+          });
+          that.setData({
+            longitude: markersData[0].longitude
+          });
+          that.showMarkerInfo(markersData, 0);
+        } else {
+          wx.getLocation({
+            type: 'gcj02',
+            success: function (res) {
+              that.setData({
+                latitude: res.latitude
+              });
+              that.setData({
+                longitude: res.longitude
+              });
+              that.setData({
+                city: '北京市'
+              });
+            },
+            fail: function () {
+              that.setData({
+                latitude: 39.909729
+              });
+              that.setData({
+                longitude: 116.398419
+              });
+              that.setData({
+                city: '北京市'
+              });
+            }
+          })
+
+          that.setData({
+            textData: {
+              name: '抱歉，未找到结果',
+              desc: ''
+            }
           });
         }
+
+      },
+      fail: function (info) {
+        // wx.showModal({title:info.errMsg})
+      }
+    }
+    if (e && e.keywords) {
+      params.querykeywords = e.keywords;
+    }
+    myAmapFun.getPoiAround(params)
+  },
+  bindInput: function (e) {
+    var that = this;
+    var url = '../inputPoi/inputPoi';
+    if (e.target.dataset.latitude && e.target.dataset.longitude && e.target.dataset.city) {
+      var dataset = e.target.dataset;
+      url = url + '?lonlat=' + dataset.longitude + ',' + dataset.latitude + '&city=' + dataset.city;
+    }
+    wx.redirectTo({
+      url: url
+    })
+  },
+  showMarkerInfo: function (data, i) {
+    var that = this;
+    that.setData({
+      textData: {
+        name: data[i].name,
+        desc: data[i].address
       }
     });
   },
-  getType(e) {//获取选择的附近关键词，同时更新状态
-    this.setData({ status: e.currentTarget.dataset.type })
-    this.getAround(e.currentTarget.dataset.keywords, e.currentTarget.dataset.type);
-  },
-  getAround(keywords, types) {//通过关键词获取附近的点，只取前十个，同时保证十个点在地图中显示
-    var _this = this;
-    var myAmap = new amap.AMapWX({ key: '07f55ffb53ed08c3fff087ec0691cd34' });
-    myAmap.getPoiAround({
-      iconPath: '../../images/map/marker.png',
-      querykeywords: keywords,
-      querytypes: types,
-      location: _this.data.location,
-      success(data) {
-        if (data.markers) {
-          var markers = [], points = [];
-          for (var value of data.markers) {
-            if (value.id > 15) break;//至少返回15条附近相关内容
-            if (value.id == 0) {
-              _this.setData({
-                name: value.name,
-                address: value.address,
-                isShow: true
-              })
-            }
-            markers.push({
-              id: value.id,
-              latitude: value.latitude,
-              longitude: value.longitude,
-              title: value.name,
-              iconPath: value.iconPath,
-              width: 30,
-              height: 40,
-              anchor: { x: .5, y: 1 },
-            });
-            points.push({
-              latitude: value.latitude,
-              longitude: value.longitude
-            })
-          }
-          _this.setData({
-            markers: markers,
-            points: points
-          })
-        }
-      },
-      fail: function (info) {
-        wx.showToast({ title: info })
+  changeMarkerColor: function (data, i) {
+    var that = this;
+    var markers = [];
+    for (var j = 0; j < data.length; j++) {
+      if (j == i) {
+        data[j].iconPath = "../../images/map/marker_checked.png";
+      } else {
+        data[j].iconPath = "../../images/map/marker.png";
       }
-    })
+      markers.push({
+        id: data[j].id,
+        latitude: data[j].latitude,
+        longitude: data[j].longitude,
+        iconPath: data[j].iconPath,
+        width: data[j].width,
+        height: data[j].height
+      })
+    }
+    that.setData({
+      markers: markers
+    });
   }
-});
+
+})

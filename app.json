@@ -11,7 +11,8 @@
     "pages/logs/logs",
     "pages/movieall/home/home",
     "pages/movieall/searchResult/searchResult",
-    "pages/movieall/filmDetail/filmDetail"
+    "pages/movieall/filmDetail/filmDetail",
+    "pages/inputPoi/inputPoi"
 
   ],
   "window":{
