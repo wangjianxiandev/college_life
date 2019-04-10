@@ -115,7 +115,7 @@ Page({
   loadCity:function(latitude,longitude){
     var page = this;
     wx.request({
-      url: 'http://api.map.baidu.com/geocoder/v2/?ak=1NqzGF6Y0CPAhWsMQS2RH4c1YV5tWIMr&location=' + latitude + ',' + longitude + '&output=json',
+      url: 'http://api.map.baidu.com/geocoder/v2/?ak=kBqTci8tUGLEZbDD5jTfVPTmTes1HiYX&location=' + latitude + ',' + longitude + '&output=json',
       header:{
         'content-type':'application/json'
       },

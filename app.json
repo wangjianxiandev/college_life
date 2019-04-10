@@ -32,7 +32,7 @@
       },
       {
         "pagePath": "pages/notebook/notebook",
-        "text": "笔记",
+        "text": "日记",
         "iconPath": "images/tabbar/xiangmu.png",
         "selectedIconPath": "images/tabbar/xiangmu2.png"
       },
