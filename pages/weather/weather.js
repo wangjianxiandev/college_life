@@ -1,123 +1,175 @@
 //index.js
-var api = require('../../libs/api')
+var bmap = require('../../libs/bmap-wx.js');
 
 //获取应用实例
 var app = getApp()
 Page({
   data: {
-   today:{},
-   future:{},
-   weatherurl:'',
-   backgroundurl:'',
-   backgroundarr:[
-    {
-      type:'晴',
-      url:'/images/weather/sunnyBackground.jpg'
-    },
-    {
-      type:'雨',
-      url:'/images/weather/rainBackground.jpg'
-    },
-    {
-      type:'雪',
-      url:'/images/weather/snowBackground.jpg'
-    },
-    {
-      type:'云',
-      url:'/images/weather/cloudBackground.jpg'
-    }
-   ],
-   weatherarr:[
-     {
-       type:'晴',
-       url:'/images/weather/qing.png'
-     },
-     {
-      type:'多云',
-      url:'/images/weather/duoyun.png'
-     },
-     {
-       type:'小雨',
-       url:'/images/weather/yu.png'
-     },
-     {
-       type: '多云转晴',
-       url: '/images/weather/duoyunzhuanqing.png'
-     },
-     {
-       type: '雷阵雨',
-       url: '/images/weather/leizhenyu.png'
-     },
-     {
-       type: '阴',
-       url: '/images/weather/yin.png'
-     },
-     {
-       type: '雨夹雪',
-       url: '/images/weather/yujiaxue.png'
-     },
-     {
-       type: '中雪',
-       url: '/images/weather/xue.png'
-     },
-     {
-       type: '小雪',
-       url: '/images/weather/xue.png'
-     },
-     {
-       type: '大雪',
-       url: '/images/weather/xue.png'
-     },
-     {
-       type: '中雨',
-       url: '/images/weather/yu.png'
-     },
-     {
-       type: '大雨',
-       url: '/images/weather/yu.png'
-     },
-     {
-       type: '浮尘',
-       url: '/images/weather/fuchen.png'
-     },
-     {
-       type: '扬沙',
-       url: '/images/weather/yangsha.png'
-     },
-     {
-       type: '阵雨',
-       url: '/images/weather/yu.png'
-     },
+    weatherData: '',
+    futureWeather:[],
+    today: {},
+    future: {},
+    weatherurl: '',
+    backgroundurl: '',
+    backgroundarr: [
+      {
+        type: '晴',
+        url: '/images/weather/sunnyBackground.jpg'
+      },
+      {
+        type: '雨',
+        url: '/images/weather/rainBackground.jpg'
+      },
+      {
+        type: '雪',
+        url: '/images/weather/snowBackground.jpg'
+      },
+      {
+        type: '云',
+        url: '/images/weather/cloudBackground.jpg'
+      }
+    ],
+    weatherarr: [
+      {
+        type: '晴',
+        url: '/images/weather/qing.png'
+      },
+      {
+        type: '多云',
+        url: '/images/weather/duoyun.png'
+      },
+      {
+        type: '小雨',
+        url: '/images/weather/yu.png'
+      },
+      {
+        type: '多云转晴',
+        url: '/images/weather/duoyunzhuanqing.png'
+      },
+      {
+        type: '雷阵雨',
+        url: '/images/weather/leizhenyu.png'
+      },
+      {
+        type: '阴',
+        url: '/images/weather/yin.png'
+      },
+      {
+        type: '雨夹雪',
+        url: '/images/weather/yujiaxue.png'
+      },
+      {
+        type: '中雪',
+        url: '/images/weather/xue.png'
+      },
+      {
+        type: '小雪',
+        url: '/images/weather/xue.png'
+      },
+      {
+        type: '大雪',
+        url: '/images/weather/xue.png'
+      },
+      {
+        type: '中雨',
+        url: '/images/weather/yu.png'
+      },
+      {
+        type: '大雨',
+        url: '/images/weather/yu.png'
+      },
+      {
+        type: '浮尘',
+        url: '/images/weather/fuchen.png'
+      },
+      {
+        type: '扬沙',
+        url: '/images/weather/yangsha.png'
+      },
+      {
+        type: '阵雨',
+        url: '/images/weather/yu.png'
+      },
 
-   ]
-   
+    ]
+
   },
 
   //事件处理函数
 
   onLoad: function () {
-   this.loadInfo();
+    var that = this;
+    var weatherarr = this.data.weatherarr;
+    var weatherurl = '';
+    var backgroundurl = '';
+    var backgroundarr = this.data.backgroundarr;
+    // 新建百度地图对象 
+    var BMap = new bmap.BMapWX({
+      ak: 'kBqTci8tUGLEZbDD5jTfVPTmTes1HiYX'
+    });
+    var fail = function (data) {
+      console.log(data)
+    };
+    var success = function (data) {
+      var weatherData = data.currentWeather[0];
+      var futureWeather = data.originalData.results[0].weather_data;  
+      console.log('城市：' + weatherData.currentCity + '\n' + 'PM2.5：' + weatherData.pm25 + '\n' + '日期：' + weatherData.date + '\n' + '温度：' + weatherData.temperature + '\n' + '天气：' + weatherData.weatherDesc + '\n' + '风力：' + weatherData.wind + '\n');
+      
+      
+      console.log('城市：' + futureWeather[1].currentCity + '\n' + 'PM2.5：' + futureWeather[1].pm25 + '\n' + '日期：' + futureWeather[1].date + '\n' + '温度：' + futureWeather[1].temperature + '\n' + '天气：' + futureWeather[1].weatherDesc + '\n' + '风力：' + futureWeather[1].wind + '\n');
+
+      for (var i = 0; i < weatherarr.length; i++) {
+        if (weatherarr[i].type == weatherData.weatherDesc) {
+          weatherurl = weatherarr[i].url;
+        }
+      }
+      var typeStr = weatherData.weatherDesc;
+
+      for (var j = 0; j < backgroundarr.length; j++) {
+        if (typeStr.indexOf(backgroundarr[j].type) >= 0) {
+          console.log("isequal background" + typeStr.indexOf(backgroundarr[j].type));
+          backgroundurl = backgroundarr[j].url;
+        }
+      }
+      console.log(weatherurl);
+       
+      that.setData({
+        weatherurl: weatherurl,
+
+        backgroundurl: backgroundurl,
+
+        weatherData: weatherData,
+        futureWeather:futureWeather,
+      });
+    }
+    // 发起weather请求 
+    BMap.weather({
+      fail: fail,
+      success: success
+    });
+    //  this.loadInfo();
   },
-  
-  loadInfo:function(){
+
+  loadInfo: function () {
     var page = this;
     wx.getLocation({
-      type:'pcj02',
-      success: function(res) {
+      type: 'pcj02',
+      success: function (res) {
         var latitude = res.latitude;
         var longidtude = res.longitude;
-        console.log(latitude,longidtude);
-        page.loadCity(latitude,longidtude);
+        console.log(latitude, longidtude);
+        page.loadCity(latitude, longidtude);
       },
     })
   },
 
-  loadCity:function(latitude,longitude){
+  loadCity: function (latitude, longitude) {
+
     var page = this;
     wx.request({
-      url: 'http://api.map.baidu.com/geocoder/v2/?ak=kBqTci8tUGLEZbDD5jTfVPTmTes1HiYX&location=' + latitude + ',' + longitude + '&output=json',
-      header:{
-        'content-type':'application/json'
+      url: 'https://api.map.baidu.com/geocoder/v2/?ak=kBqTci8tUGLEZbDD5jTfVPTmTes1HiYX&location=' + latitude + ',' + longitude + '&output=json',
+      header: {
+        'content-type': 'application/json'
       },
       success: function (res) {
 
@@ -136,7 +188,7 @@ Page({
       }
     })
   },
-  loadWeather:function(city){
+  loadWeather: function (city) {
     var page = this;
     var weatherarr = this.data.weatherarr;
     var weatherurl = '';
@@ -145,7 +197,7 @@ Page({
     console.log(weatherarr[1].type);
     wx.request({
 
-      url: 'http://wthrcdn.etouch.cn/weather_mini?city=' + city,
+      // url: 'https://wthrcdn.etouch.cn/weather_mini?city=' + city,
 
       header: {
 
@@ -163,19 +215,18 @@ Page({
 
         var today = res.data.data;
 
-        console.log(weatherarr[1].type);  
+        console.log(weatherarr[1].type);
 
         today.todayInfo = todayInfo;
-        for(var i= 0;i<weatherarr.length;i++){
-          if(weatherarr[i].type==today.todayInfo.type)
-          {
-            weatherurl=weatherarr[i].url;
+        for (var i = 0; i < weatherarr.length; i++) {
+          if (weatherarr[i].type == today.todayInfo.type) {
+            weatherurl = weatherarr[i].url;
           }
         }
         var typeStr = today.todayInfo.type;
-        
-        for(var j=0;j<backgroundarr.length;j++){
-          if( typeStr.indexOf(backgroundarr[j].type)>=0 ){
+
+        for (var j = 0; j < backgroundarr.length; j++) {
+          if (typeStr.indexOf(backgroundarr[j].type) >= 0) {
             console.log("isequal background" + typeStr.indexOf(backgroundarr[j].type));
             backgroundurl = backgroundarr[j].url;
           }
@@ -189,15 +240,15 @@ Page({
 
           weatherurl: weatherurl,
 
-          backgroundurl:backgroundurl,
+          backgroundurl: backgroundurl,
         });
-        
+
       }
-   
+
     })
   },
   onShow: function () {
-   
+
   },
   /**
    * 用户点击右上角分享

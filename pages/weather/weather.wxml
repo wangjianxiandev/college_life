@@ -7,20 +7,20 @@
         <view class="today">
           <view class="today_text">
             <text >今天是一个</text>
-            <text style='font-size:50rpx;color:rgba(235, 231, 2, 0.897);font-weight:800;'>{{today.todayInfo.type}}天</text>
+            <text style='font-size:50rpx;color:rgba(235, 231, 2, 0.897);font-weight:800;'>{{weatherData.weatherDesc}}天</text>
             <text>呐~\n</text>
-            <text>风向：{{today.todayInfo.fengxiang}} </text>
+            <text>风向：{{ weatherData.wind}} </text>
           </view>
           <view class="temperature">
-            <text >当前温度：{{today.wendu}}°</text> 
+            <text >温度：{{weatherData.temperature}}°</text> 
           </view>
           <view class="weather_pic">
           <image src="{{weatherurl}}" style="height:150rpx;width:150rpx;" ></image>
             
           </view>
           <view class="today_pic">
-            <text style="font-size:50rpx;color:red;font-weight:800">注意：</text>
-            <text>{{today.ganmao}}</text>
+            <!-- <text style="font-size:50rpx;color:red;font-weight:800">注意：</text> -->
+            <text>{{weatherData.date}}</text>
           </view>
          
         </view>
@@ -28,18 +28,17 @@
           <text>未来几天：</text>
         </view>
         <swiper class='future'>
-          <block  wx:for="{{future}}"  wx:key="dayIdx">
+          <block  wx:for="{{futureWeather}}"  wx:key="dayIdx">
             <swiper-item >
               <scroll-view  class='future'scroll-y="true" scroll-with-animation="true">
                 <view class = "feature" >
                   <view class="date">{{item.date}}</view>
                   <view class="desc">
-                    <text>{{item.type}}</text>
-                    <text>{{item.fengxiang}}</text>
+                    <text>{{item.weatherDesc}}</text>
+                    <text>风向：{{item.wind}}</text>
                   </view>
                   <view class="temperature">
-                    <text>最{{item.low}}°\n</text>
-                    <text>最{{item.high}}°</text>
+                    <text>温度：{{item.temperature}}</text>
                   </view>
                 </view>
               </scroll-view>
