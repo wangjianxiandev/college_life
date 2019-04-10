@@ -22,7 +22,6 @@
   box-sizing: border-box;
 } 
 
-
 .loading {
     position: fixed;
     left: 50%;

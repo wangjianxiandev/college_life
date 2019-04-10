@@ -24,13 +24,13 @@
 }
 .today_pic{
   float:left;
-  text-align: left;
-  height:125rpx;
+  text-align: center;
+  height:100rpx;
   font-weight: 600;
   margin-left: 15rpx;
   width:96%;
   color:black;
-  font-size: 35rpx;
+  font-size: 45rpx;
   /* background-color: gainsboro; */
 }
 .notice{
@@ -38,9 +38,9 @@
   text-align: left;
   margin-left: 15rpx;
   /* background-color: red; */
-  margin-top:70rpx;
+  margin-top:30rpx;
   color:rgb(7, 220, 248);
-  font-size: 40rpx;
+  font-size: 50rpx;
   font-weight: 800;
 }
 .today_text{
@@ -57,6 +57,7 @@
   margin-top: 15rpx;
   float: left;
   text-align: center;
+  
   /* background-color: coral; */
   width:40%;
   height:150rpx;
