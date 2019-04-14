@@ -1,4 +1,4 @@
-//index.js
+
 var bmap = require('../../libs/bmap-wx.js');
 
 //获取应用实例
@@ -92,11 +92,8 @@ Page({
       },
 
     ]
-
   },
-
   //事件处理函数
-
   onLoad: function () {
     var that = this;
     var weatherarr = this.data.weatherarr;
@@ -113,31 +110,22 @@ Page({
     var success = function (data) {
       var weatherData = data.currentWeather[0];
       var futureWeather = data.originalData.results[0].weather_data;  
-      console.log('城市：' + weatherData.currentCity + '\n' + 'PM2.5：' + weatherData.pm25 + '\n' + '日期：' + weatherData.date + '\n' + '温度：' + weatherData.temperature + '\n' + '天气：' + weatherData.weatherDesc + '\n' + '风力：' + weatherData.wind + '\n');
-      
-      
-      console.log('城市：' + futureWeather[1].currentCity + '\n' + 'PM2.5：' + futureWeather[1].pm25 + '\n' + '日期：' + futureWeather[1].date + '\n' + '温度：' + futureWeather[1].temperature + '\n' + '天气：' + futureWeather[1].weatherDesc + '\n' + '风力：' + futureWeather[1].wind + '\n');
-
       for (var i = 0; i < weatherarr.length; i++) {
         if (weatherarr[i].type == weatherData.weatherDesc) {
           weatherurl = weatherarr[i].url;
         }
       }
-      var typeStr = weatherData.weatherDesc;
-
+      var typeStr = weatherData.weatherDesc;//返回天气情况
       for (var j = 0; j < backgroundarr.length; j++) {
+        //根据相应的关键字提取出符合当前天气的内容部分
         if (typeStr.indexOf(backgroundarr[j].type) >= 0) {
           console.log("isequal background" + typeStr.indexOf(backgroundarr[j].type));
           backgroundurl = backgroundarr[j].url;
         }
-      }
-      console.log(weatherurl);
-       
+      }  
       that.setData({
         weatherurl: weatherurl,
-
         backgroundurl: backgroundurl,
-
         weatherData: weatherData,
         futureWeather:futureWeather,
       });
@@ -147,7 +135,6 @@ Page({
       fail: fail,
       success: success
     });
-    //  this.loadInfo();
   },
 
   loadInfo: function () {
@@ -164,7 +151,6 @@ Page({
   },
 
   loadCity: function (latitude, longitude) {
-
     var page = this;
     wx.request({
       url: 'https://api.map.baidu.com/geocoder/v2/?ak=kBqTci8tUGLEZbDD5jTfVPTmTes1HiYX&location=' + latitude + ',' + longitude + '&output=json',
@@ -172,17 +158,10 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-
-        console.log(res);
-
         var city = res.data.result.addressComponent.city;
-
         city = city.replace("市", "");
-
         page.setData({
-
           city: city
-
         });
         page.loadWeather(city);
       }
@@ -194,29 +173,16 @@ Page({
     var weatherurl = '';
     var backgroundurl = '';
     var backgroundarr = this.data.backgroundarr;
-    console.log(weatherarr[1].type);
     wx.request({
-
-      // url: 'https://wthrcdn.etouch.cn/weather_mini?city=' + city,
-
       header: {
-
         'content-type': 'application/json'
-
       },
-
       success: function (res) {
-
         console.log(res);
-
         var future = res.data.data.forecast;
-
         var todayInfo = future.shift();
-
         var today = res.data.data;
-
         console.log(weatherarr[1].type);
-
         today.todayInfo = todayInfo;
         for (var i = 0; i < weatherarr.length; i++) {
           if (weatherarr[i].type == today.todayInfo.type) {
@@ -224,7 +190,6 @@ Page({
           }
         }
         var typeStr = today.todayInfo.type;
-
         for (var j = 0; j < backgroundarr.length; j++) {
           if (typeStr.indexOf(backgroundarr[j].type) >= 0) {
             console.log("isequal background" + typeStr.indexOf(backgroundarr[j].type));
@@ -233,27 +198,19 @@ Page({
         }
         console.log(weatherurl);
         page.setData({
-
           today: today,
-
           future: future,
-
           weatherurl: weatherurl,
-
           backgroundurl: backgroundurl,
         });
-
       }
-
     })
   },
   onShow: function () {
-
   },
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
   }
 })

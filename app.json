@@ -12,7 +12,8 @@
     "pages/movieall/home/home",
     "pages/movieall/searchResult/searchResult",
     "pages/movieall/filmDetail/filmDetail",
-    "pages/inputPoi/inputPoi"
+    "pages/inputPoi/inputPoi",
+    "pages/weather/weather"
 
   ],
   "window":{

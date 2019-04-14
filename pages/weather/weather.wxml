@@ -1,6 +1,6 @@
 <!--pages/weather/weather.wxml-->
 <view class = "back_view">
-  <image src="{{backgroundurl}}" mode="aspectFit" class = "background-image"></image>
+  <image src="{{backgroundurl}}"  class = "background-image"></image>
   <block >
     <view>
       <scroll-view >
@@ -9,17 +9,16 @@
             <text >今天是一个</text>
             <text style='font-size:50rpx;color:rgba(235, 231, 2, 0.897);font-weight:800;'>{{weatherData.weatherDesc}}天</text>
             <text>呐~\n</text>
-            <text>风向：{{ weatherData.wind}} </text>
+            <text>风力：{{ weatherData.wind}} </text>
           </view>
           <view class="temperature">
-            <text >温度：{{weatherData.temperature}}°</text> 
+            <text >温度：{{weatherData.temperature}}</text> 
           </view>
           <view class="weather_pic">
           <image src="{{weatherurl}}" style="height:150rpx;width:150rpx;" ></image>
             
           </view>
           <view class="today_pic">
-            <!-- <text style="font-size:50rpx;color:red;font-weight:800">注意：</text> -->
             <text>{{weatherData.date}}</text>
           </view>
          
@@ -35,7 +34,7 @@
                   <view class="date">{{item.date}}</view>
                   <view class="desc">
                     <text>{{item.weatherDesc}}</text>
-                    <text>风向：{{item.wind}}</text>
+                    <text>风力：{{item.wind}}</text>
                   </view>
                   <view class="temperature">
                     <text>温度：{{item.temperature}}</text>
@@ -45,8 +44,6 @@
             </swiper-item>
           </block>
         </swiper>
-        
-        
       </scroll-view>
     </view>
   </block>
